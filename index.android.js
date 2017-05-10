@@ -4,13 +4,20 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { Component } from "react";
+import { AppRegistry, StyleSheet, Text, View } from "react-native";
+
+async function getMoviesFromApi() {
+  try {
+    let response = await fetch(
+      "https://facebook.github.io/react-native/movies.json"
+    );
+    let responseJson = await response.json();
+    return responseJson.movies;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export default class HelloWorld extends Component {
   render() {
@@ -27,15 +34,15 @@ export default class HelloWorld extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
+    textAlign: "center",
+    margin: 10
+  }
 });
 
-AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
+AppRegistry.registerComponent("HelloWorld", () => HelloWorld);
